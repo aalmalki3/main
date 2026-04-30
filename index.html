@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHFQ Hub | منصة شفق </title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-peach: #fae8d4;
+            --brand-apricot: #f2cdae;
+            --brand-ice: #cde0e5;
+            --brand-slate: #8f9ea6;
+            --brand-charcoal: #333333;
+            
+            --bg-page: #fdfcfb;
+            --surface: rgba(255, 255, 255, 0.85);
+            --text-main: var(--brand-charcoal);
+            --text-muted: #5c6b73;
+            --border-light: rgba(205, 224, 229, 0.5); 
+            
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            --shadow-ops: 0 4px 0px var(--brand-slate); 
+            --shadow-card: 0 4px 20px rgba(143, 158, 166, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow-x: hidden;
+            border-top: 6px solid;
+            border-image: linear-gradient(to right, var(--brand-peach), var(--brand-apricot), var(--brand-ice), var(--brand-slate)) 1;
+        }
+
+        /* Ambient Orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 450px; height: 450px; background-color: var(--brand-peach); top: -100px; right: -100px; }
+        .orb-2 { width: 350px; height: 350px; background-color: var(--brand-ice); bottom: -50px; left: -100px; animation-delay: -5s; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-30px, 50px) scale(1.1); } }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; position: relative; }
+
+        /* Header & Data Ribbon */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.25rem 2rem; background: var(--surface); backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light); border-radius: var(--radius-md); box-shadow: var(--shadow-ops); 
+            margin-bottom: 1.5rem;
+        }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--brand-charcoal); display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.5px; }
+        .logo span { color: var(--brand-slate); font-family: 'Inter', sans-serif; font-weight: 600; }
+
+        .data-ribbon {
+            display: flex; gap: 2rem; background: rgba(255,255,255,0.6); border: 1px solid var(--border-light);
+            padding: 0.75rem 2rem; border-radius: var(--radius-sm); margin-bottom: 4rem; font-size: 0.85rem; font-weight: 600; color: var(--brand-slate); backdrop-filter: blur(5px);
+        }
+        .data-ribbon div { display: flex; align-items: center; gap: 0.5rem; }
+        .status-dot { width: 8px; height: 8px; background-color: #10b981; border-radius: 50%; }
+
+        .hero { text-align: center; margin-bottom: 4rem; }
+        .hero h1 { font-size: 3.2rem; font-weight: 800; color: var(--brand-charcoal); margin-bottom: 1rem; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto; font-weight: 500; }
+
+        /* Operational Tracks */
+        .track-section { margin-bottom: 5rem; }
+        .track-header { margin-bottom: 2rem; padding-right: 1rem; border-right: 4px solid var(--brand-slate); }
+        .track-header h2 { font-size: 1.8rem; font-weight: 800; color: var(--brand-charcoal); margin-bottom: 0.25rem; }
+        .track-header p { font-size: 1rem; color: var(--text-muted); }
+        
+        .track-career { border-right-color: var(--brand-apricot); }
+        .track-business { border-right-color: var(--brand-slate); }
+
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+        /* Operational Cards */
+        .card {
+            background: var(--surface); backdrop-filter: blur(8px); border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg); padding: 2rem; transition: all 0.3s ease; box-shadow: var(--shadow-card);
+            border-bottom: 4px solid var(--brand-ice); display: flex; flex-direction: column; position: relative;
+        }
+        .card:hover { transform: translateY(-4px); border-bottom-color: var(--brand-slate); box-shadow: 0 10px 25px rgba(143, 158, 166, 0.2); }
+
+        .card-badge { position: absolute; top: 1.5rem; left: 1.5rem; padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: var(--brand-charcoal); }
+        .icon-container { font-size: 2rem; margin-bottom: 1rem; color: var(--brand-slate); }
+        .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--brand-charcoal); padding-left: 4rem;}
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; flex-grow: 1; }
+
+        .action-btn {
+            display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem;
+            background-color: var(--brand-slate); color: white; text-decoration: none; border-radius: var(--radius-sm);
+            font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; align-self: flex-start;
+        }
+        .action-btn:hover { background-color: var(--brand-charcoal); }
+
+        footer { margin-top: 4rem; padding: 2rem 0; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+        
+        @media (max-width: 600px) { 
+            header { flex-direction: column-reverse; gap: 1rem; text-align: center; } 
+            .data-ribbon { flex-direction: column; gap: 1rem; text-align: center; } 
+            .track-header { border-right: none; padding-right: 0; text-align: center; border-bottom: 2px solid var(--brand-slate); padding-bottom: 1rem; } 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <div class="container">
+        <header>
+            <div><button style="background: transparent; border: 2px solid var(--border-light); padding: 0.5rem 1rem; border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; font-weight: 600;">English 🌐</button></div>
+            <div class="logo">شفق <span>SHFQ</span></div>
+        </header>
+
+        <div class="data-ribbon">
+            <div><div class="status-dot"></div> بيئة التشغيل: محلية (Static)</div>
+            <div>⚡ المسارات: نشطة</div>
+        </div>
+
+        <main>
+            <div class="hero">
+                <h1>مركز العمليات</h1>
+                <p>أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.</p>
+            </div>
+
+            <!-- TRACK 1: CAREER & GRADUATES -->
+            <div class="track-section">
+                <div class="track-header track-career">
+                    <h2>مسار الكفاءات والخريجين 🎓</h2>
+                    <p>أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات للوافدين الجدد لسوق العمل.</p>
+                </div>
+                
+                <div class="bento-grid">
+                    
+                    <!-- Tool Card 1 -->
+                    <div class="card">
+                        <div class="card-badge" style="background-color: var(--brand-peach); color: var(--brand-charcoal);">تطوير أفراد</div>
+                        <div class="icon-container">📄</div>
+                        <h3>منصة Resumive</h3>
+                        <p>أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.</p>
+                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
+                    </div>
+
+                    <!-- Tool Card 2 -->
+                    <div class="card">
+                        <div class="card-badge" style="background-color: var(--brand-ice); color: var(--brand-charcoal);">تقييم</div>
+                        <div class="icon-container">🧭</div>
+                        <h3>اختبار المهارات الأساسية</h3>
+                        <p>تقييم ذاتي لتحديد نقاط القوة والمسار المهني الأنسب للخريج.</p>
+                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TRACK 2: BUSINESS & STARTUPS -->
+            <div class="track-section">
+                <div class="track-header track-business">
+                    <h2>مسار الأعمال والمشاريع 🏢</h2>
+                    <p>حلول تشغيلية، مالية، وإدارية مصممة لدعم تأسيس ونمو الأسر المنتجة والشركات الناشئة.</p>
+                </div>
+                
+                <div class="bento-grid">
+                    
+                    <!-- Tool Card 3 -->
+                    <div class="card">
+                        <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">إدارة أعمال</div>
+                        <div class="icon-container">💰</div>
+                        <h3>ميزانية التشغيل والمشاريع</h3>
+                        <p>أداة تخطيط مالي مبسطة لحساب التكاليف والأرباح للأعمال الصغيرة والناشئة.</p>
+                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
+                    </div>
+
+                    <!-- Tool Card 4 -->
+                    <div class="card">
+                        <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">عمليات</div>
+                        <div class="icon-container">⚙️</div>
+                        <h3>أدوات الإدارة والموارد</h3>
+                        <p>نماذج وأدوات هيكلية لتنظيم سير العمل الداخلي للمؤسسة.</p>
+                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">الخصوصية</a>
+                <a href="#" style="color: inherit; text-decoration: none;">شروط الاستخدام</a>
+            </div>
+            <div>منصة شفق، جميع الحقوق محفوظة © 2026</div>
+        </footer>
+    </div>
+
+</body>
+</html>
