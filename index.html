@@ -154,7 +154,17 @@
                 </div>
                 
                 <div class="bento-grid">
-                    <a href="/career" class="card" target="_blank">
+                    <!-- Psychological Analysis -->
+                    <a href="https://aalmalki3.github.io/psych/" class="card" target="_blank">
+                        <div class="card-badge" style="background-color: var(--brand-apricot);">Deep Insights</div>
+                        <div class="icon-container">🧠</div>
+                        <h3 id="toolPsychTitle">التحليل النفسي</h3>
+                        <p id="toolPsychDesc">أداة متقدمة لتحليل السمات الشخصية وتحديد الميول المهنية بناءً على معايير علمية.</p>
+                        <span class="action-btn" id="runToolPsych">تشغيل الأداة</span>
+                    </a>
+
+                    <!-- Career Launch -->
+                    <a href="https://aalmalki3.github.io/shfq/" class="card" target="_blank">
                         <div class="card-badge" style="background-color: var(--brand-peach);">Career DNA</div>
                         <div class="icon-container">🧭</div>
                         <h3 id="tool1Title">انطلاقة مهنة</h3>
@@ -162,6 +172,7 @@
                         <span class="action-btn" id="runTool1">تشغيل الأداة</span>
                     </a>
 
+                    <!-- Resumive -->
                     <a href="https://aalmalki3.github.io/resumive" class="card" target="_blank">
                         <div class="card-badge" style="background-color: var(--brand-ice);">ATS-Ready</div>
                         <div class="icon-container">📄</div>
@@ -179,7 +190,8 @@
                 </div>
                 
                 <div class="bento-grid">
-                    <a href="/family" class="card" target="_blank">
+                    <!-- Manasweet -->
+                    <a href="https://aalmalki3.github.io/manasweet/" class="card" target="_blank">
                         <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">SaaS</div>
                         <div class="icon-container">⚙️</div>
                         <h3 id="tool3Title">منصة Manasweet</h3>
@@ -214,6 +226,7 @@
                 heroDesc: "أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.",
                 gradTrackTitle: "مسار الكفاءات والخريجين 🎓", gradTrackDesc: "أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات.",
                 bizTrackTitle: "مسار الأعمال والمشاريع 🏢", bizTrackDesc: "حلول تشغيلية ومالية مصممة لدعم نمو الشركات الناشئة والأسر المنتجة.",
+                toolPsychTitle: "التحليل النفسي", toolPsychDesc: "تحليل السمات الشخصية وتحديد الميول المهنية بناءً على معايير علمية.",
                 tool1Title: "انطلاقة مهنة", tool1Desc: "بوصلة مهنية، محاكي مقابلة STAR، ومؤشر الرواتب للخريجين الجدد.",
                 tool2Title: "منصة Resumive", tool2Desc: "أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.",
                 tool3Title: "منصة Manasweet", tool3Desc: "نظام متكامل لإدارة الطلبات، المخزون، والعمليات للأسر المنتجة.",
@@ -226,6 +239,7 @@
                 heroDesc: "Structured assessment and planning tools designed to support new talents and manage startup trajectories.",
                 gradTrackTitle: "Talent & Graduate Track 🎓", gradTrackDesc: "Specialized tools for CV building, career guidance, and skills assessment.",
                 bizTrackTitle: "Business & Projects Track 🏢", bizTrackDesc: "Operational and financial solutions designed for startups and productive families.",
+                toolPsychTitle: "Psychological Analysis", toolPsychDesc: "Analysis of personality traits and career leanings based on scientific standards.",
                 tool1Title: "Career Launch", tool1Desc: "Career compass, STAR interview simulator, and salary anchor for fresh graduates.",
                 tool2Title: "Resumive Platform", tool2Desc: "CV builder optimized for market standards and ATS requirements.",
                 tool3Title: "Manasweet Platform", tool3Desc: "Integrated order and inventory management system for productive families.",
@@ -251,6 +265,8 @@
             document.getElementById('gradTrackDesc').innerText = d.gradTrackDesc;
             document.getElementById('bizTrackTitle').innerText = d.bizTrackTitle;
             document.getElementById('bizTrackDesc').innerText = d.bizTrackDesc;
+            document.getElementById('toolPsychTitle').innerText = d.toolPsychTitle;
+            document.getElementById('toolPsychDesc').innerText = d.toolPsychDesc;
             document.getElementById('tool1Title').innerText = d.tool1Title;
             document.getElementById('tool1Desc').innerText = d.tool1Desc;
             document.getElementById('tool2Title').innerText = d.tool2Title;
@@ -260,6 +276,7 @@
             document.getElementById('tool4Title').innerText = d.tool4Title;
             document.getElementById('tool4Desc').innerText = d.tool4Desc;
             
+            document.getElementById('runToolPsych').innerText = d.runTool;
             document.getElementById('runTool1').innerText = d.runTool;
             document.getElementById('runTool2').innerText = d.runTool;
             document.getElementById('runTool3').innerText = d.runTool;
