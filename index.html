@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHFQ Hub | منصة شفق </title>
+    <title>SHFQ Hub | مركز العمليات</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +45,6 @@
             border-image: linear-gradient(to right, var(--brand-peach), var(--brand-apricot), var(--brand-ice), var(--brand-slate)) 1;
         }
 
-        /* Ambient Orbs */
         .ambient-orb {
             position: fixed;
             border-radius: 50%;
@@ -60,7 +59,6 @@
 
         .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; position: relative; }
 
-        /* Header & Data Ribbon */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.25rem 2rem; background: var(--surface); backdrop-filter: blur(10px);
@@ -69,6 +67,13 @@
         }
         .logo { font-size: 1.8rem; font-weight: 800; color: var(--brand-charcoal); display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.5px; }
         .logo span { color: var(--brand-slate); font-family: 'Inter', sans-serif; font-weight: 600; }
+
+        .lang-toggle {
+            background: transparent; border: 2px solid var(--border-light); 
+            padding: 0.5rem 1rem; border-radius: var(--radius-sm); 
+            cursor: pointer; font-family: inherit; font-weight: 600; transition: 0.2s;
+        }
+        .lang-toggle:hover { background: var(--brand-ice); border-color: var(--brand-slate); }
 
         .data-ribbon {
             display: flex; gap: 2rem; background: rgba(255,255,255,0.6); border: 1px solid var(--border-light);
@@ -81,7 +86,6 @@
         .hero h1 { font-size: 3.2rem; font-weight: 800; color: var(--brand-charcoal); margin-bottom: 1rem; }
         .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto; font-weight: 500; }
 
-        /* Operational Tracks */
         .track-section { margin-bottom: 5rem; }
         .track-header { margin-bottom: 2rem; padding-right: 1rem; border-right: 4px solid var(--brand-slate); }
         .track-header h2 { font-size: 1.8rem; font-weight: 800; color: var(--brand-charcoal); margin-bottom: 0.25rem; }
@@ -92,15 +96,15 @@
 
         .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
 
-        /* Operational Cards */
         .card {
             background: var(--surface); backdrop-filter: blur(8px); border: 1px solid var(--border-light);
             border-radius: var(--radius-lg); padding: 2rem; transition: all 0.3s ease; box-shadow: var(--shadow-card);
             border-bottom: 4px solid var(--brand-ice); display: flex; flex-direction: column; position: relative;
+            text-decoration: none; color: inherit;
         }
         .card:hover { transform: translateY(-4px); border-bottom-color: var(--brand-slate); box-shadow: 0 10px 25px rgba(143, 158, 166, 0.2); }
 
-        .card-badge { position: absolute; top: 1.5rem; left: 1.5rem; padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; color: var(--brand-charcoal); }
+        .card-badge { position: absolute; top: 1.5rem; left: 1.5rem; padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
         .icon-container { font-size: 2rem; margin-bottom: 1rem; color: var(--brand-slate); }
         .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--brand-charcoal); padding-left: 4rem;}
         .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; flex-grow: 1; }
@@ -110,7 +114,7 @@
             background-color: var(--brand-slate); color: white; text-decoration: none; border-radius: var(--radius-sm);
             font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; align-self: flex-start;
         }
-        .action-btn:hover { background-color: var(--brand-charcoal); }
+        .card:hover .action-btn { background-color: var(--brand-charcoal); }
 
         footer { margin-top: 4rem; padding: 2rem 0; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
         
@@ -128,91 +132,145 @@
 
     <div class="container">
         <header>
-            <div><button style="background: transparent; border: 2px solid var(--border-light); padding: 0.5rem 1rem; border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; font-weight: 600;">English 🌐</button></div>
-            <div class="logo">شفق <span>SHFQ</span></div>
+            <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">English 🌐</button>
+            <div class="logo">شفق <span id="brandEn">SHFQ</span></div>
         </header>
 
         <div class="data-ribbon">
-            <div><div class="status-dot"></div> بيئة التشغيل: محلية (Static)</div>
-            <div>⚡ المسارات: نشطة</div>
+            <div><div class="status-dot"></div> <span id="envText">بيئة التشغيل: سحابية (Cloudflare)</span></div>
+            <div>⚡ <span id="trackStatusText">المسارات: نشطة</span></div>
         </div>
 
         <main>
             <div class="hero">
-                <h1>مركز العمليات</h1>
-                <p>أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.</p>
+                <h1 id="heroTitle">مركز العمليات</h1>
+                <p id="heroDesc">أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.</p>
             </div>
 
-            <!-- TRACK 1: CAREER & GRADUATES -->
             <div class="track-section">
                 <div class="track-header track-career">
-                    <h2>مسار الكفاءات والخريجين 🎓</h2>
-                    <p>أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات للوافدين الجدد لسوق العمل.</p>
+                    <h2 id="gradTrackTitle">مسار الكفاءات والخريجين 🎓</h2>
+                    <p id="gradTrackDesc">أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات.</p>
                 </div>
                 
                 <div class="bento-grid">
-                    
-                    <!-- Tool Card 1 -->
-                    <div class="card">
-                        <div class="card-badge" style="background-color: var(--brand-peach); color: var(--brand-charcoal);">تطوير أفراد</div>
-                        <div class="icon-container">📄</div>
-                        <h3>منصة Resumive</h3>
-                        <p>أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.</p>
-                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
-                    </div>
-
-                    <!-- Tool Card 2 -->
-                    <div class="card">
-                        <div class="card-badge" style="background-color: var(--brand-ice); color: var(--brand-charcoal);">تقييم</div>
+                    <a href="/career" class="card" target="_blank">
+                        <div class="card-badge" style="background-color: var(--brand-peach);">Career DNA</div>
                         <div class="icon-container">🧭</div>
-                        <h3>اختبار المهارات الأساسية</h3>
-                        <p>تقييم ذاتي لتحديد نقاط القوة والمسار المهني الأنسب للخريج.</p>
-                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
-                    </div>
+                        <h3 id="tool1Title">انطلاقة مهنة</h3>
+                        <p id="tool1Desc">بوصلة مهنية، محاكي مقابلة STAR، ومؤشر الرواتب للخريجين الجدد.</p>
+                        <span class="action-btn" id="runTool1">تشغيل الأداة</span>
+                    </a>
 
+                    <a href="https://aalmalki3.github.io/resumive" class="card" target="_blank">
+                        <div class="card-badge" style="background-color: var(--brand-ice);">ATS-Ready</div>
+                        <div class="icon-container">📄</div>
+                        <h3 id="tool2Title">منصة Resumive</h3>
+                        <p id="tool2Desc">أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.</p>
+                        <span class="action-btn" id="runTool2">تشغيل الأداة</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- TRACK 2: BUSINESS & STARTUPS -->
             <div class="track-section">
                 <div class="track-header track-business">
-                    <h2>مسار الأعمال والمشاريع 🏢</h2>
-                    <p>حلول تشغيلية، مالية، وإدارية مصممة لدعم تأسيس ونمو الأسر المنتجة والشركات الناشئة.</p>
+                    <h2 id="bizTrackTitle">مسار الأعمال والمشاريع 🏢</h2>
+                    <p id="bizTrackDesc">حلول تشغيلية ومالية مصممة لدعم نمو الشركات الناشئة والأسر المنتجة.</p>
                 </div>
                 
                 <div class="bento-grid">
-                    
-                    <!-- Tool Card 3 -->
-                    <div class="card">
-                        <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">إدارة أعمال</div>
-                        <div class="icon-container">💰</div>
-                        <h3>ميزانية التشغيل والمشاريع</h3>
-                        <p>أداة تخطيط مالي مبسطة لحساب التكاليف والأرباح للأعمال الصغيرة والناشئة.</p>
-                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
-                    </div>
-
-                    <!-- Tool Card 4 -->
-                    <div class="card">
-                        <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">عمليات</div>
+                    <a href="/family" class="card" target="_blank">
+                        <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">SaaS</div>
                         <div class="icon-container">⚙️</div>
-                        <h3>أدوات الإدارة والموارد</h3>
-                        <p>نماذج وأدوات هيكلية لتنظيم سير العمل الداخلي للمؤسسة.</p>
-                        <a href="https://your-link-here.com" class="action-btn" target="_blank">تشغيل الأداة</a>
-                    </div>
+                        <h3 id="tool3Title">منصة Manasweet</h3>
+                        <p id="tool3Desc">نظام متكامل لإدارة الطلبات، المخزون، والعمليات للأسر المنتجة.</p>
+                        <span class="action-btn" id="runTool3">تشغيل الأداة</span>
+                    </a>
 
+                    <div class="card" style="opacity: 0.7; cursor: not-allowed;">
+                        <div class="card-badge" style="background-color: #eee;">Soon</div>
+                        <div class="icon-container">💰</div>
+                        <h3 id="tool4Title">ميزانية التشغيل</h3>
+                        <p id="tool4Desc">أداة تخطيط مالي مبسطة لحساب التكاليف والأرباح للأعمال الناشئة.</p>
+                        <span class="action-btn" style="background-color: #ccc;" id="runTool4">قريباً</span>
+                    </div>
                 </div>
             </div>
-
         </main>
 
         <footer>
             <div style="display: flex; gap: 1.5rem;">
-                <a href="#" style="color: inherit; text-decoration: none;">الخصوصية</a>
-                <a href="#" style="color: inherit; text-decoration: none;">شروط الاستخدام</a>
+                <a href="#" style="color: inherit; text-decoration: none;" id="privacyLink">الخصوصية</a>
+                <a href="#" style="color: inherit; text-decoration: none;" id="termsLink">الشروط</a>
             </div>
-            <div>منصة شفق، جميع الحقوق محفوظة © 2026</div>
+            <div id="copyText">منصة شفق، جميع الحقوق محفوظة © 2026</div>
         </footer>
     </div>
 
+    <script>
+        const dict = {
+            ar: {
+                langBtn: "English 🌐", heroTitle: "مركز العمليات",
+                heroDesc: "أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.",
+                gradTrackTitle: "مسار الكفاءات والخريجين 🎓", gradTrackDesc: "أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات.",
+                bizTrackTitle: "مسار الأعمال والمشاريع 🏢", bizTrackDesc: "حلول تشغيلية ومالية مصممة لدعم نمو الشركات الناشئة والأسر المنتجة.",
+                tool1Title: "انطلاقة مهنة", tool1Desc: "بوصلة مهنية، محاكي مقابلة STAR، ومؤشر الرواتب للخريجين الجدد.",
+                tool2Title: "منصة Resumive", tool2Desc: "أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.",
+                tool3Title: "منصة Manasweet", tool3Desc: "نظام متكامل لإدارة الطلبات، المخزون، والعمليات للأسر المنتجة.",
+                tool4Title: "ميزانية التشغيل", tool4Desc: "أداة تخطيط مالي مبسطة لحساب التكاليف والأرباح للأعمال الناشئة.",
+                runTool: "تشغيل الأداة", soon: "قريباً", env: "بيئة التشغيل: سحابية (Cloudflare)", status: "المسارات: نشطة",
+                privacy: "الخصوصية", terms: "الشروط", copy: "منصة شفق، جميع الحقوق محفوظة © 2026"
+            },
+            en: {
+                langBtn: "عربي 🌐", heroTitle: "Operations Center",
+                heroDesc: "Structured assessment and planning tools designed to support new talents and manage startup trajectories.",
+                gradTrackTitle: "Talent & Graduate Track 🎓", gradTrackDesc: "Specialized tools for CV building, career guidance, and skills assessment.",
+                bizTrackTitle: "Business & Projects Track 🏢", bizTrackDesc: "Operational and financial solutions designed for startups and productive families.",
+                tool1Title: "Career Launch", tool1Desc: "Career compass, STAR interview simulator, and salary anchor for fresh graduates.",
+                tool2Title: "Resumive Platform", tool2Desc: "CV builder optimized for market standards and ATS requirements.",
+                tool3Title: "Manasweet Platform", tool3Desc: "Integrated order and inventory management system for productive families.",
+                tool4Title: "Operational Budget", tool4Desc: "Simplified financial planning tool for startups and micro-businesses.",
+                runTool: "Run Tool", soon: "Coming Soon", env: "Runtime: Cloudflare Proxy", status: "Tracks: Active",
+                privacy: "Privacy", terms: "Terms", copy: "SHFQ Platform, All Rights Reserved © 2026"
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const d = dict[currentLang];
+            
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            document.getElementById('langBtn').innerText = d.langBtn;
+            document.getElementById('heroTitle').innerText = d.heroTitle;
+            document.getElementById('heroDesc').innerText = d.heroDesc;
+            document.getElementById('gradTrackTitle').innerText = d.gradTrackTitle;
+            document.getElementById('gradTrackDesc').innerText = d.gradTrackDesc;
+            document.getElementById('bizTrackTitle').innerText = d.bizTrackTitle;
+            document.getElementById('bizTrackDesc').innerText = d.bizTrackDesc;
+            document.getElementById('tool1Title').innerText = d.tool1Title;
+            document.getElementById('tool1Desc').innerText = d.tool1Desc;
+            document.getElementById('tool2Title').innerText = d.tool2Title;
+            document.getElementById('tool2Desc').innerText = d.tool2Desc;
+            document.getElementById('tool3Title').innerText = d.tool3Title;
+            document.getElementById('tool3Desc').innerText = d.tool3Desc;
+            document.getElementById('tool4Title').innerText = d.tool4Title;
+            document.getElementById('tool4Desc').innerText = d.tool4Desc;
+            
+            document.getElementById('runTool1').innerText = d.runTool;
+            document.getElementById('runTool2').innerText = d.runTool;
+            document.getElementById('runTool3').innerText = d.runTool;
+            document.getElementById('runTool4').innerText = d.soon;
+            
+            document.getElementById('envText').innerText = d.env;
+            document.getElementById('trackStatusText').innerText = d.status;
+            document.getElementById('privacyLink').innerText = d.privacy;
+            document.getElementById('termsLink').innerText = d.terms;
+            document.getElementById('copyText').innerText = d.copy;
+        }
+    </script>
 </body>
 </html>
