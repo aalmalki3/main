@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHFQ Hub | مركز العمليات</title>
+    <title>مختبر هندسة الوظائف | SHFQ Hub</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,113 +16,94 @@
             --brand-ice: #cde0e5;
             --brand-slate: #8f9ea6;
             --brand-charcoal: #333333;
-            
             --bg-page: #fdfcfb;
-            --surface: rgba(255, 255, 255, 0.85);
-            --text-main: var(--brand-charcoal);
-            --text-muted: #5c6b73;
-            --border-light: rgba(205, 224, 229, 0.5); 
-            
-            --radius-sm: 6px;
+            --surface: rgba(255, 255, 255, 0.9);
+            --border-light: rgba(205, 224, 229, 0.5);
+            --shadow-ops: 0 4px 0px var(--brand-slate);
             --radius-md: 12px;
-            --radius-lg: 20px;
-            
-            --shadow-ops: 0 4px 0px var(--brand-slate); 
-            --shadow-card: 0 4px 20px rgba(143, 158, 166, 0.1);
+            --radius-lg: 24px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Tajawal', 'Inter', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             background-color: var(--bg-page);
-            color: var(--text-main);
+            color: var(--brand-charcoal);
             line-height: 1.6;
             min-height: 100vh;
-            padding: 1rem;
-            overflow-x: hidden;
+            padding: 1.5rem;
             border-top: 6px solid;
             border-image: linear-gradient(to right, var(--brand-peach), var(--brand-apricot), var(--brand-ice), var(--brand-slate)) 1;
         }
 
-        .ambient-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.6;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-        .orb-1 { width: 450px; height: 450px; background-color: var(--brand-peach); top: -100px; right: -100px; }
-        .orb-2 { width: 350px; height: 350px; background-color: var(--brand-ice); bottom: -50px; left: -100px; animation-delay: -5s; }
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-30px, 50px) scale(1.1); } }
+        /* Ambient Background */
+        .ambient-orb { position: fixed; border-radius: 50%; filter: blur(80px); z-index: -1; opacity: 0.5; animation: float 20s infinite alternate ease-in-out; }
+        .orb-1 { width: 500px; height: 500px; background: var(--brand-peach); top: -100px; right: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: var(--brand-ice); bottom: -50px; left: -100px; animation-delay: -5s; }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(-30px, 40px); } }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; position: relative; }
+        .container { max-width: 1000px; margin: 0 auto; position: relative; }
 
+        /* UI Components */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1.25rem 2rem; background: var(--surface); backdrop-filter: blur(10px);
-            border: 1px solid var(--border-light); border-radius: var(--radius-md); box-shadow: var(--shadow-ops); 
-            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light); border-radius: var(--radius-md); box-shadow: var(--shadow-ops);
+            margin-bottom: 2rem;
         }
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--brand-charcoal); display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.5px; }
-        .logo span { color: var(--brand-slate); font-family: 'Inter', sans-serif; font-weight: 600; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--brand-charcoal); }
+        .logo span { color: var(--brand-slate); font-family: 'Inter', sans-serif; }
 
-        .lang-toggle {
-            background: transparent; border: 2px solid var(--border-light); 
-            padding: 0.5rem 1rem; border-radius: var(--radius-sm); 
-            cursor: pointer; font-family: inherit; font-weight: 600; transition: 0.2s;
+        .wizard-card {
+            background: var(--surface); backdrop-filter: blur(15px);
+            border: 1px solid var(--border-light); border-radius: var(--radius-lg);
+            padding: 2.5rem; box-shadow: 0 10px 30px rgba(143, 158, 166, 0.1);
+            min-height: 500px;
         }
-        .lang-toggle:hover { background: var(--brand-ice); border-color: var(--brand-slate); }
 
-        .data-ribbon {
-            display: flex; gap: 2rem; background: rgba(255,255,255,0.6); border: 1px solid var(--border-light);
-            padding: 0.75rem 2rem; border-radius: var(--radius-sm); margin-bottom: 4rem; font-size: 0.85rem; font-weight: 600; color: var(--brand-slate); backdrop-filter: blur(5px);
-        }
-        .data-ribbon div { display: flex; align-items: center; gap: 0.5rem; }
-        .status-dot { width: 8px; height: 8px; background-color: #10b981; border-radius: 50%; }
+        .step-container { display: none; animation: fadeIn 0.4s ease; }
+        .step-container.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero { text-align: center; margin-bottom: 4rem; }
-        .hero h1 { font-size: 3.2rem; font-weight: 800; color: var(--brand-charcoal); margin-bottom: 1rem; }
-        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto; font-weight: 500; }
-
-        .track-section { margin-bottom: 5rem; }
-        .track-header { margin-bottom: 2rem; padding-right: 1rem; border-right: 4px solid var(--brand-slate); }
-        .track-header h2 { font-size: 1.8rem; font-weight: 800; color: var(--brand-charcoal); margin-bottom: 0.25rem; }
-        .track-header p { font-size: 1rem; color: var(--text-muted); }
+        /* Typography & Inputs */
+        h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--brand-charcoal); border-right: 5px solid var(--brand-apricot); padding-right: 1rem; }
+        .coach-hint { background: var(--brand-peach); border-radius: var(--radius-md); padding: 1rem; font-size: 0.85rem; margin-bottom: 1.5rem; font-weight: 500; border-right: 4px solid var(--brand-apricot); }
         
-        .track-career { border-right-color: var(--brand-apricot); }
-        .track-business { border-right-color: var(--brand-slate); }
-
-        .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-
-        .card {
-            background: var(--surface); backdrop-filter: blur(8px); border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg); padding: 2rem; transition: all 0.3s ease; box-shadow: var(--shadow-card);
-            border-bottom: 4px solid var(--brand-ice); display: flex; flex-direction: column; position: relative;
-            text-decoration: none; color: inherit;
+        label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-muted); }
+        input, textarea, select {
+            width: 100%; padding: 0.85rem; border: 1.5px solid var(--border-light);
+            border-radius: var(--radius-md); font-family: inherit; font-size: 1rem;
+            background: rgba(255,255,255,0.5); transition: 0.2s;
         }
-        .card:hover { transform: translateY(-4px); border-bottom-color: var(--brand-slate); box-shadow: 0 10px 25px rgba(143, 158, 166, 0.2); }
+        input:focus, textarea:focus { border-color: var(--brand-slate); outline: none; background: #fff; }
 
-        .card-badge { position: absolute; top: 1.5rem; left: 1.5rem; padding: 0.35rem 0.85rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
-        .icon-container { font-size: 2rem; margin-bottom: 1rem; color: var(--brand-slate); }
-        .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--brand-charcoal); padding-left: 4rem;}
-        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; flex-grow: 1; }
-
-        .action-btn {
-            display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem;
-            background-color: var(--brand-slate); color: white; text-decoration: none; border-radius: var(--radius-sm);
-            font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; align-self: flex-start;
+        /* Level Cards */
+        .level-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .level-card { 
+            padding: 1.25rem; border: 2px solid var(--border-light); border-radius: var(--radius-md); 
+            cursor: pointer; transition: 0.3s; background: white;
         }
-        .card:hover .action-btn { background-color: var(--brand-charcoal); }
+        .level-card.selected { border-color: var(--brand-apricot); background: var(--brand-peach); transform: scale(1.02); }
+        .level-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .level-card p { font-size: 0.75rem; color: var(--brand-slate); font-weight: 600; }
 
-        footer { margin-top: 4rem; padding: 2rem 0; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-        
-        @media (max-width: 600px) { 
-            header { flex-direction: column-reverse; gap: 1rem; text-align: center; } 
-            .data-ribbon { flex-direction: column; gap: 1rem; text-align: center; } 
-            .track-header { border-right: none; padding-right: 0; text-align: center; border-bottom: 2px solid var(--brand-slate); padding-bottom: 1rem; } 
+        /* Buttons */
+        .btn-primary { 
+            background: var(--brand-charcoal); color: white; border: none; 
+            padding: 0.85rem 2.5rem; border-radius: 8px; font-weight: 700; 
+            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 0 var(--brand-slate);
         }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--brand-slate); }
+        .btn-secondary { background: transparent; border: 2px solid var(--brand-slate); color: var(--brand-charcoal); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
+
+        /* Print Area */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; padding: 0; border: none; }
+            .print-area { display: block !important; border: 2px solid #333; padding: 30px; border-radius: 0; box-shadow: none; }
+        }
+        .print-area { display: none; }
     </style>
 </head>
 <body>
@@ -131,162 +112,197 @@
     <div class="ambient-orb orb-2"></div>
 
     <div class="container">
-        <header>
-            <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">English 🌐</button>
-            <div class="logo">شفق <span id="brandEn">SHFQ</span></div>
+        <header class="no-print">
+            <div class="logo">شفق <span>SHFQ</span></div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--brand-slate);">النسخة 3.0 | مركز العمليات</div>
         </header>
 
-        <div class="data-ribbon">
-            <div><div class="status-dot"></div> <span id="envText">بيئة التشغيل: سحابية (Cloudflare)</span></div>
-            <div>⚡ <span id="trackStatusText">المسارات: نشطة</span></div>
-        </div>
-
-        <main>
-            <div class="hero">
-                <h1 id="heroTitle">مركز العمليات</h1>
-                <p id="heroDesc">أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.</p>
-            </div>
-
-            <div class="track-section">
-                <div class="track-header track-career">
-                    <h2 id="gradTrackTitle">مسار الكفاءات والخريجين 🎓</h2>
-                    <p id="gradTrackDesc">أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات.</p>
+        <div class="wizard-card no-print">
+            <!-- STEP 1 -->
+            <div id="step-1" class="step-container active">
+                <h2>1. سياق الوظيفة</h2>
+                <div class="coach-hint">التوجيه المهني: ابدأ بصياغة الغرض الوجودي بتركيز على القيمة لا المهمة.</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div><label>الإدارة / القسم</label><input type="text" id="dept" placeholder="الموارد البشرية"></div>
+                    <div><label>المسمى الوظيفي</label><input type="text" id="title" placeholder="أخصائي كفاءات"></div>
+                    <div><label>كود الوظيفة</label><input type="text" id="job-code" placeholder="HR-2026"></div>
+                    <div><label>المرجع الإداري</label><input type="text" id="reports" placeholder="مدير التميز التشغيلي"></div>
                 </div>
-                
-                <div class="bento-grid">
-                    <!-- Psychological Analysis - Masked via Worker -->
-                    <a href="/psych" class="card">
-                        <div class="card-badge" style="background-color: var(--brand-apricot);">Deep Insights</div>
-                        <div class="icon-container">🧠</div>
-                        <h3 id="toolPsychTitle">التحليل النفسي</h3>
-                        <p id="toolPsychDesc">أداة متقدمة لتحليل السمات الشخصية وتحديد الميول المهنية بناءً على معايير علمية.</p>
-                        <span class="action-btn" id="runToolPsych">تشغيل الأداة</span>
-                    </a>
-
-                    <!-- Career Launch - Masked via Worker -->
-                    <a href="/career" class="card">
-                        <div class="card-badge" style="background-color: var(--brand-peach);">Career DNA</div>
-                        <div class="icon-container">🧭</div>
-                        <h3 id="tool1Title">انطلاقة مهنة</h3>
-                        <p id="tool1Desc">بوصلة مهنية، محاكي مقابلة STAR، ومؤشر الرواتب للخريجين الجدد.</p>
-                        <span class="action-btn" id="runTool1">تشغيل الأداة</span>
-                    </a>
-
-                    <!-- Resumive - Keep external link if not managed by current worker -->
-                    <a href="https://aalmalki3.github.io/resumive" class="card" target="_blank">
-                        <div class="card-badge" style="background-color: var(--brand-ice);">ATS-Ready</div>
-                        <div class="icon-container">📄</div>
-                        <h3 id="tool2Title">منصة Resumive</h3>
-                        <p id="tool2Desc">أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.</p>
-                        <span class="action-btn" id="runTool2">تشغيل الأداة</span>
-                    </a>
+                <label>الغرض الاستراتيجي (لماذا وجدت هذه الوظيفة؟)</label>
+                <textarea id="purpose" rows="3" placeholder="مثلاً: تمكين الكفاءات الشابة من الاندماج في سوق العمل عبر أنظمة تقييم دقيقة..."></textarea>
+                <div style="margin-top: 2rem; text-align: left;">
+                    <button class="btn-primary" onclick="nav(2)">الخطوة التالية ➔</button>
                 </div>
             </div>
 
-            <div class="track-section">
-                <div class="track-header track-business">
-                    <h2 id="bizTrackTitle">مسار الأعمال والمشاريع 🏢</h2>
-                    <p id="bizTrackDesc">حلول تشغيلية ومالية مصممة لدعم نمو الشركات الناشئة والأسر المنتجة.</p>
-                </div>
-                
-                <div class="bento-grid">
-                    <!-- Manasweet - Masked via Worker -->
-                    <a href="/family" class="card">
-                        <div class="card-badge" style="background-color: var(--brand-slate); color: #fff;">SaaS</div>
-                        <div class="icon-container">⚙️</div>
-                        <h3 id="tool3Title">منصة Manasweet</h3>
-                        <p id="tool3Desc">نظام متكامل لإدارة الطلبات، المخزون، والعمليات للأسر المنتجة.</p>
-                        <span class="action-btn" id="runTool3">تشغيل الأداة</span>
-                    </a>
-
-                    <div class="card" style="opacity: 0.7; cursor: not-allowed;">
-                        <div class="card-badge" style="background-color: #eee;">Soon</div>
-                        <div class="icon-container">💰</div>
-                        <h3 id="tool4Title">ميزانية التشغيل</h3>
-                        <p id="tool4Desc">أداة تخطيط مالي مبسطة لحساب التكاليف والأرباح للأعمال الناشئة.</p>
-                        <span class="action-btn" style="background-color: #ccc;" id="runTool4">قريباً</span>
+            <!-- STEP 2 -->
+            <div id="step-2" class="step-container">
+                <h2>2. المسؤوليات الرئيسية</h2>
+                <div class="coach-hint">المعيار المهني: الالتزام = فعل + موضوع + نتيجة. (الحد الأدنى 3).</div>
+                <div id="tasks-list" style="margin-bottom: 1rem;">
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <input type="text" class="task-input" placeholder="مثلاً: تطوير أدلة العمل لضمان توحيد معايير الأداء...">
                     </div>
                 </div>
+                <button onclick="addTask()" style="background: var(--brand-ice); border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 700;">+ إضافة مسؤولية</button>
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
+                    <button class="btn-secondary" onclick="nav(1)">السابق</button>
+                    <button class="btn-primary" onclick="validateStep2()">تحديد المستوى ➔</button>
+                </div>
             </div>
-        </main>
 
-        <footer>
-            <div style="display: flex; gap: 1.5rem;">
-                <a href="#" style="color: inherit; text-decoration: none;" id="privacyLink">الخصوصية</a>
-                <a href="#" style="color: inherit; text-decoration: none;" id="termsLink">الشروط</a>
+            <!-- STEP 3 -->
+            <div id="step-3" class="step-container">
+                <h2>3. الوزن والمستوى الوظيفي</h2>
+                <div class="coach-hint">التحليل: حدد مستوى الاستقلالية واتخاذ القرار بناءً على ثقل المهام السابقة.</div>
+                <div class="level-grid">
+                    <div class="level-card" onclick="selectLevel('Entry (تنفيذي)', this)">
+                        <h4>مستوى تنفيذي</h4>
+                        <p>مهام روتينية، إشراف مباشر، تنفيذ إجرائي.</p>
+                    </div>
+                    <div class="level-card" onclick="selectLevel('Professional (تخصصي)', this)">
+                        <h4>مستوى تخصصي</h4>
+                        <p>استقلالية متوسطة، تطبيق معرفي، أثر على القسم.</p>
+                    </div>
+                    <div class="level-card" onclick="selectLevel('Lead (إشرافي)', this)">
+                        <h4>مستوى إشرافي</h4>
+                        <p>توجيه الآخرين، تحسين العمليات، أثر قطاعي.</p>
+                    </div>
+                </div>
+                <input type="hidden" id="level-val">
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
+                    <button class="btn-secondary" onclick="nav(2)">السابق</button>
+                    <button class="btn-primary" onclick="validateStep3()">استنباط الجدارات ➔</button>
+                </div>
             </div>
-            <div id="copyText">منصة شفق، جميع الحقوق محفوظة © 2026</div>
-        </footer>
+
+            <!-- STEP 4 -->
+            <div id="step-4" class="step-container">
+                <h2>4. مصفوفة الجدارات</h2>
+                <div id="comp-lab"></div>
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
+                    <button class="btn-secondary" onclick="nav(3)">السابق</button>
+                    <button class="btn-primary" onclick="generateFinal()">توليد الوصف النهائي ✨</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL OUTPUT AREA -->
+        <div id="step-5" class="step-container print-area" style="background: white; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: end; border-bottom: 4px solid var(--brand-charcoal); padding-bottom: 1rem; margin-bottom: 2rem;">
+                <div>
+                    <h1 id="out-title" style="font-size: 2.5rem; font-weight: 800;"></h1>
+                    <p id="out-dept" style="color: var(--brand-slate); font-weight: 700;"></p>
+                </div>
+                <div style="text-align: left; font-family: 'Inter'; font-size: 0.8rem; font-weight: 700;">
+                    <p>SHFQ HUB | OPERATIONS</p>
+                    <p id="out-code"></p>
+                </div>
+            </div>
+            
+            <div style="background: var(--brand-peach); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; display: flex; justify-content: space-between;">
+                <span><strong>المستوى:</strong> <span id="out-level"></span></span>
+                <span><strong>المرجع:</strong> <span id="out-reports"></span></span>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; border-right: 8px solid var(--brand-apricot); padding-right: 1rem;">الغرض الاستراتيجي</h3>
+            <p id="out-purpose" style="margin-bottom: 2rem; color: #555; line-height: 1.8;"></p>
+
+            <h3 style="margin-bottom: 1rem; border-right: 8px solid var(--brand-ice); padding-right: 1rem;">المسؤوليات والالتزامات</h3>
+            <ul id="out-tasks" style="margin-bottom: 2rem; padding-right: 2rem; line-height: 2;"></ul>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4 style="border-bottom: 2px solid var(--brand-apricot); padding-bottom: 0.5rem; margin-bottom: 1rem;">الجدارات السلوكية</h4>
+                    <ul id="out-soft" style="font-size: 0.9rem; list-style: none;"></ul>
+                </div>
+                <div>
+                    <h4 style="border-bottom: 2px solid var(--brand-ice); padding-bottom: 0.5rem; margin-bottom: 1rem;">الجدارات الفنية</h4>
+                    <ul id="out-hard" style="font-size: 0.9rem; list-style: none;"></ul>
+                </div>
+            </div>
+
+            <div class="no-print" style="margin-top: 3rem; text-align: center;">
+                <button class="btn-primary" onclick="window.print()">تحميل الوصف الوظيفي (PDF)</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        const dict = {
-            ar: {
-                langBtn: "English 🌐", heroTitle: "مركز العمليات",
-                heroDesc: "أدوات تقييم وتخطيط هيكلية مصممة لدعم الكفاءات الجديدة، وإدارة مسارات الشركات الناشئة بدقة.",
-                gradTrackTitle: "مسار الكفاءات والخريجين 🎓", gradTrackDesc: "أدوات مخصصة لبناء السيرة الذاتية، التوجيه المهني، وتقييم المهارات.",
-                bizTrackTitle: "مسار الأعمال والمشاريع 🏢", bizTrackDesc: "حلول تشغيلية ومالية مصممة لدعم نمو الشركات الناشئة والأسر المنتجة.",
-                toolPsychTitle: "التحليل النفسي", toolPsychDesc: "تحليل السمات الشخصية وتحديد الميول المهنية بناءً على معايير علمية.",
-                tool1Title: "انطلاقة مهنة", tool1Desc: "بوصلة مهنية، محاكي مقابلة STAR، ومؤشر الرواتب للخريجين الجدد.",
-                tool2Title: "منصة Resumive", tool2Desc: "أداة بناء وتحسين السيرة الذاتية لتتوافق مع معايير ومتطلبات سوق العمل.",
-                tool3Title: "منصة Manasweet", tool3Desc: "نظام متكامل لإدارة الطلبات، المخزون، والعمليات للأسر المنتجة.",
-                tool4Title: "ميزانية التشغيل", tool4Desc: "أداة تخطيط مالي مبسطة لحساب التكاليف والأرباح للأعمال الناشئة.",
-                runTool: "تشغيل الأداة", soon: "قريباً", env: "بيئة التشغيل: سحابية (Cloudflare)", status: "المسارات: نشطة",
-                privacy: "الخصوصية", terms: "الشروط", copy: "منصة شفق، جميع الحقوق محفوظة © 2026"
-            },
-            en: {
-                langBtn: "عربي 🌐", heroTitle: "Operations Center",
-                heroDesc: "Structured assessment and planning tools designed to support new talents and manage startup trajectories.",
-                gradTrackTitle: "Talent & Graduate Track 🎓", gradTrackDesc: "Specialized tools for CV building, career guidance, and skills assessment.",
-                bizTrackTitle: "Business & Projects Track 🏢", bizTrackDesc: "Operational and financial solutions designed for startups and productive families.",
-                toolPsychTitle: "Psychological Analysis", toolPsychDesc: "Analysis of personality traits and career leanings based on scientific standards.",
-                tool1Title: "Career Launch", tool1Desc: "Career compass, STAR interview simulator, and salary anchor for fresh graduates.",
-                tool2Title: "Resumive Platform", tool2Desc: "CV builder optimized for market standards and ATS requirements.",
-                tool3Title: "Manasweet Platform", tool3Desc: "Integrated order and inventory management system for productive families.",
-                tool4Title: "Operational Budget", tool4Desc: "Simplified financial planning tool for startups and micro-businesses.",
-                runTool: "Run Tool", soon: "Coming Soon", env: "Runtime: Cloudflare Proxy", status: "Tracks: Active",
-                privacy: "Privacy", terms: "Terms", copy: "SHFQ Platform, All Rights Reserved © 2026"
+        function nav(s) {
+            document.querySelectorAll('.step-container').forEach(c => c.classList.remove('active'));
+            document.getElementById('step-' + s).classList.add('active');
+        }
+
+        function addTask() {
+            const div = document.createElement('div');
+            div.style.display = "flex";
+            div.style.gap = "0.5rem";
+            div.style.marginBottom = "0.5rem";
+            div.innerHTML = `<input type="text" class="task-input" placeholder="مسؤولية إضافية...">`;
+            document.getElementById('tasks-list').appendChild(div);
+        }
+
+        function validateStep2() {
+            const inputs = document.querySelectorAll('.task-input');
+            if(inputs.length < 3) { alert("يجب كتابة 3 مسؤوليات على الأقل."); return; }
+            nav(3);
+        }
+
+        function selectLevel(val, el) {
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('level-val').value = val;
+        }
+
+        function validateStep3() {
+            if(!document.getElementById('level-val').value) { alert("يرجى تحديد المستوى الوظيفي."); return; }
+            buildLab();
+            nav(4);
+        }
+
+        function buildLab() {
+            const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => i.value);
+            const lab = document.getElementById('comp-lab');
+            lab.innerHTML = "";
+            tasks.forEach((t, idx) => {
+                const div = document.createElement('div');
+                div.style.background = "rgba(143, 158, 166, 0.05)";
+                div.style.padding = "1rem";
+                div.style.borderRadius = "8px";
+                div.style.marginBottom = "1rem";
+                div.innerHTML = `
+                    <div style="font-weight: 700; margin-bottom: 1rem; color: var(--brand-slate);">تحليل للمهمة: "${t}"</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="text" class="soft-in-${idx}" placeholder="جدارة سلوكية (مثلاً: ذكاء عاطفي)">
+                        <input type="text" class="hard-in-${idx}" placeholder="جدارة فنية (مثلاً: تحليل بيانات)">
+                    </div>
+                `;
+                lab.appendChild(div);
+            });
+        }
+
+        function generateFinal() {
+            document.getElementById('out-title').innerText = document.getElementById('title').value;
+            document.getElementById('out-dept').innerText = document.getElementById('dept').value;
+            document.getElementById('out-code').innerText = "ID: " + document.getElementById('job-code').value;
+            document.getElementById('out-reports').innerText = document.getElementById('reports').value;
+            document.getElementById('out-level').innerText = document.getElementById('level-val').value;
+            document.getElementById('out-purpose').innerText = document.getElementById('purpose').value;
+            
+            const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => `<li>${i.value}</li>`).join('');
+            document.getElementById('out-tasks').innerHTML = tasks;
+
+            let soft = [], hard = [];
+            const taskCount = document.querySelectorAll('.task-input').length;
+            for(let i=0; i<taskCount; i++) {
+                soft.push(document.querySelector(`.soft-in-${i}`).value);
+                hard.push(document.querySelector(`.hard-in-${i}`).value);
             }
-        };
+            document.getElementById('out-soft').innerHTML = [...new Set(soft)].filter(x => x).map(x => `<li>• ${x}</li>`).join('');
+            document.getElementById('out-hard').innerHTML = [...new Set(hard)].filter(x => x).map(x => `<li>• ${x}</li>`).join('');
 
-        let currentLang = 'ar';
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            const d = dict[currentLang];
-            
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.documentElement.lang = currentLang;
-            
-            document.getElementById('langBtn').innerText = d.langBtn;
-            document.getElementById('heroTitle').innerText = d.heroTitle;
-            document.getElementById('heroDesc').innerText = d.heroDesc;
-            document.getElementById('gradTrackTitle').innerText = d.gradTrackTitle;
-            document.getElementById('gradTrackDesc').innerText = d.gradTrackDesc;
-            document.getElementById('bizTrackTitle').innerText = d.bizTrackTitle;
-            document.getElementById('bizTrackDesc').innerText = d.bizTrackDesc;
-            document.getElementById('toolPsychTitle').innerText = d.toolPsychTitle;
-            document.getElementById('toolPsychDesc').innerText = d.toolPsychDesc;
-            document.getElementById('tool1Title').innerText = d.tool1Title;
-            document.getElementById('tool1Desc').innerText = d.tool1Desc;
-            document.getElementById('tool2Title').innerText = d.tool2Title;
-            document.getElementById('tool2Desc').innerText = d.tool2Desc;
-            document.getElementById('tool3Title').innerText = d.tool3Title;
-            document.getElementById('tool3Desc').innerText = d.tool3Desc;
-            document.getElementById('tool4Title').innerText = d.tool4Title;
-            document.getElementById('tool4Desc').innerText = d.tool4Desc;
-            
-            document.getElementById('runToolPsych').innerText = d.runTool;
-            document.getElementById('runTool1').innerText = d.runTool;
-            document.getElementById('runTool2').innerText = d.runTool;
-            document.getElementById('runTool3').innerText = d.runTool;
-            document.getElementById('runTool4').innerText = d.soon;
-            
-            document.getElementById('envText').innerText = d.env;
-            document.getElementById('trackStatusText').innerText = d.status;
-            document.getElementById('privacyLink').innerText = d.privacy;
-            document.getElementById('termsLink').innerText = d.terms;
-            document.getElementById('copyText').innerText = d.copy;
+            nav(5);
         }
     </script>
 </body>
